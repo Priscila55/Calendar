@@ -1,4 +1,4 @@
-The Calendar App is a web-based productivity tool designed to help users organize and manage their tasks and goals effectively. Built with Flask and MySQL on the backend and HTML, CSS, and JavaScript on the frontend, this app offers an intuitive interface for tracking daily responsibilities and long-term objectives.
+The Calendar is a website designed to help users organize and manage their tasks and goals effectively. Built with Flask and MySQL on the backend and HTML, CSS, and JavaScript on the frontend, this app offers an intuitive interface for tracking daily responsibilities and long-term objectives.
 
 Features:
 
