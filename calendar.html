@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Calendar
+{% endblock %}
+
+{% block content %}
+<body>
+    <h3>Calendar</h3>
+    <div class = "calendarC">
+        <header>
+            <nav>
+                <button id = "prev"></button>
+                <button id = "next"></button>
+            </nav>
+        </header>
+        <section>
+            <ul class = "days">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+            </ul>
+        </section>
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+    <script src = "{{ url_for('static', filename = 'calendar.js')}}"></script>
+</body>
+{% endblock %}
