@@ -1,9 +1,10 @@
-# has to do with the user
+
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session, current_app
 from flask_mysqldb import MySQL
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import current_app 
-from website.models import get_user_by_email, create_user
+from website.models import get_user_by_email
+from website import User, bcrypt
+from flask_login import login_user, logout_user
+
 
 auth = Blueprint('auth', __name__)
 
@@ -18,23 +19,25 @@ def login():
     
         try:
             user = get_user_by_email(current_app.mysql, email)
-            
+        
             if not user:
                     flash('Email does not exist.', category='error')
-            elif not check_password_hash(user[3], password):
+            elif not bcrypt.check_password_hash(user[3], password):
                     flash('Incorrect password.', category='error')
             else:
-                    session['user_id'] = user[0]
+                    user = User(id =user[0], username=user[1])
+                    login_user(user)
                     flash('Logged in successfully!', category='success')
-                    return redirect(url_for('auth.profile'))
+                    return redirect(url_for('calendar.calendar'))
         except Exception as e:
             flash(f"An error occurred: {e}", category='error')                
         
-    return render_template("login.html", boolean=True)
+    return render_template("login.html")
 
 @auth.route('/logout')
 def logout():
-    session.clear()
+    logout_user()
+    flash("You have been logged out.", category='success')
     return redirect(url_for('auth.login'))
 
 @auth.route('/signup', methods = ['POST', 'GET'])
@@ -50,18 +53,17 @@ def sign_up():
             user = get_user_by_email(current_app.mysql, email)
             if user:
                 flash('Email already exists', category='error')
-                
-            if username or len(username) < 5:
+            elif not username or len(username) < 5:
                 flash('Username should be greater than 4 characters', category='error') 
-            elif email or len(email) < 2: 
-                flash('Email should be greater than 3 characters', category='error') 
+            elif not email or len(email) < 3: 
+                flash('Email should be greater than 2 characters', category='error') 
             elif password1 != password2:
                 flash('Passwords do not match', category='error')
             elif not password1 or len(password1) < 8: 
                 flash('Password must be at least 7 characters', category='error') 
             else: 
                     # hash password 
-                    hashed_password = generate_password_hash(password1)
+                    hashed_password = bcrypt.generate_password_hash(password1).decode('utf-8')
                     query = "INSERT INTO users (username, email, password) VALUES (%s, %s, %s)" 
                     cursor.execute(query, (username, email, hashed_password))
                     current_app.mysql.connection.commit()
@@ -77,12 +79,3 @@ def sign_up():
 @auth.route('/home', methods=['GET'])
 def home():
     return render_template("home.html")
-
-@auth.route('/calendar')
-def calendar():
-    return render_template("calendar.html")
-
-@auth.route('/profile')
-def profile():
-    return render_template("profile.html")
-
