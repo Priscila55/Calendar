@@ -2,18 +2,18 @@
 
 {% block title %}
 Calendar
+
 {% endblock %}
 
 {% block content %}
-<body>
-    <h3>Calendar</h3>
     <div class = "calendarC">
-        <header>
+        <container>
             <nav>
+                <h3></h3>
                 <button id = "prev"></button>
                 <button id = "next"></button>
             </nav>
-        </header>
+        </container>
         <section>
             <ul class = "days">
             <li>Sun</li>
@@ -24,11 +24,11 @@ Calendar
             <li>Fri</li>
             <li>Sat</li>
             </ul>
+            <ul class = "dates"></ul>
         </section>
     </div>
-    {% endblock %}
+{% endblock %}
 
-    {% block scripts %}
-    <script src = "{{ url_for('static', filename = 'calendar.js')}}"></script>
-</body>
+{% block scripts %}
+   <script src = "{{ url_for('static', filename = 'calendar.js') }}"></script>
 {% endblock %}
