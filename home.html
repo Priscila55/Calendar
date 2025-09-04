@@ -5,17 +5,10 @@ Home
 {% endblock %}
 
 {% block content %}
-<div class = "home.page">
+<div class = "homePage">
 <h1>Welcome to TaskFlow</h1>
 <p>Organize your tasks, track your goals, and achieve more every day.</p>
-{%if not session.get('user_id')%}
-<div class = "home-buttons">
-    <a href = "{{ url_for('auth.login') }}" class = "btn btn-primary">Login</a>
-    <a href="{{ url_for('auth.sign_up') }}" class="btn btn-secondary">Sign Up</a>
-</div>
-{% else %}
-<a href = "{{ url_for('calendar.calendar')}}" class = "btn btn-primary">Go to Calendar</a>
-{% endif %}
+
 </div>
 
 <!-- Key features: what the app offers-->
@@ -26,6 +19,16 @@ Home
             <h3>Interactive Calendar</h3>
             <p>Click on days to manage tasks and track your progress.</p>
         </div>
-        
-
+          <div class="feature-card">
+            <h3>Goal Tracking</h3>
+            <p>Set goals and get reminders to keep you on track every day.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Achievements & Badges</h3>
+            <p>Stay motivated by earning rewards for completing tasks and milestones.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Responsive Design</h3>
+            <p>Works perfectly on desktop, tablet, and mobile devices.</p>
+        </div>
 {% endblock %}
