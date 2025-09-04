@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Home Page{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='calendar.css') }}">
 </head>
@@ -12,8 +15,8 @@
     <nav class = "navbar">
         <ul class = "nav-links">
             <li><a href ="{{url_for('auth.home')}}" id = "home">Home</a></li>
-            <li><a href ="{{url_for('auth.calendar')}}" id = "calendar">Calendar</a></li>
-            <li><a href = "{{url_for('auth.profile')}}" id = "profile">My Profile</a></li>
+            <li><a href ="{{url_for('views.calendar')}}" id = "calendar">Calendar</a></li>
+            <li><a href = "{{url_for('views.profile')}}" id = "profile">My Profile</a></li>
             {% if session.get('user_id') %}
             <li><a href = "{{url_for('auth.logout')}}" id = "logout">Logout</a></li>
             {% else %}
@@ -41,6 +44,9 @@
      {% block content %}
      {% endblock %}
      </div>
+
+     {% block scripts %}
+     {% endblock %}
 </body>
 </html>
 
