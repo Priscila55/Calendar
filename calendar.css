@@ -1,15 +1,23 @@
 .calendarC {
-    margin: auto; 
-    width: 300px auto;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 50px auto 0;
+    width: 350px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
+    padding-top: 20px;
+    border-top: 2rem solid rgb(99, 112, 149);
+    padding-top: 1rem;
+    width: 70%;
+    border-radius: 30px;
 }
 
-.calendarC header {
+.calendarC container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
 }
 
 .calendarC ul {
@@ -25,6 +33,7 @@
     margin-top: 25px;
     position: relative;
     z-index: 2;
+    font-weight: bold;
 }
 
 #prev, #next {
@@ -61,6 +70,13 @@
     border-color: #000;
 }
 
+container h3 {
+    position: absolute;  
+    left: 50%;         
+    transform: translateX(-50%); 
+    margin: 0;           
+}
+
 .days {
     font-weight: 500;
 }
@@ -77,7 +93,7 @@
     top: 50%;
     left: 50%; 
     transform: translate(-50%, -50%);
-    background: #000;
+    background:  rgb(66, 77, 107);
     border-radius: 50%;
     z-index: -1;
 }
